@@ -12,9 +12,9 @@ final class AppRouter {
     : config = GoRouter(
         //-- Register routes
         routes: _routes ??= <RouteBase>[
+          BottomNavPage.route,
           LoginPage.route,
           SignUpPage.route,
-          DashboardPage.route,
         ],
         initialLocation: initialLocation,
         navigatorKey: _rootNavigatorKey ??= GlobalKey<NavigatorState>(),

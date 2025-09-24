@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:garage/core/provider/provider.dart';
+import 'package:garage/routes/router.dart';
 import 'package:garage/shared/shared.dart';
 import 'package:garage/theme/app_colors.dart';
 
@@ -91,7 +92,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               style: TextStyle(color: Color(0xFF718096), fontSize: 14),
             ),
             GestureDetector(
-              // onTap: () => context.go(RouteNames.signUp.asPath),
+              onTap: () => context.pushNamed(RouteNames.signUp),
               child: const Text(
                 'Get Started',
                 style: TextStyle(

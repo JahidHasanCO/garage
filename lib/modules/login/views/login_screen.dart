@@ -27,7 +27,7 @@ class LoginScreen extends ConsumerWidget {
             backgroundColor: Colors.green,
           ),
         );
-        context.go(RouteNames.dashboard.asPath);
+        context.go(RouteNames.bottomNav.asPath);
       }
     });
   }

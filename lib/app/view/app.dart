@@ -28,7 +28,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   Widget build(BuildContext context) {
     final accessToken = ref.select(appProvider, (s) => s.accessToken);
     final initialLocation = accessToken != null && accessToken.isNotEmpty
-        ? RouteNames.dashboard.asPath
+        ? RouteNames.bottomNav.asPath
         : RouteNames.login.asPath;
 
     final router = AppRouter(initialLocation: initialLocation);

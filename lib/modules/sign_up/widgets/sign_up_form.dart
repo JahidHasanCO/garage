@@ -171,7 +171,7 @@ class _SignupFormState extends State<SignupForm> {
               style: TextStyle(color: Color(0xFF718096), fontSize: 14),
             ),
             GestureDetector(
-              onTap: () => context.go(RouteNames.login.asPath),
+              onTap: () => context.pushNamed(RouteNames.login),
               child: const Text(
                 'Login Now',
                 style: TextStyle(
