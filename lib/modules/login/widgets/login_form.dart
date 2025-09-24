@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:garage/core/provider/provider.dart';
-import 'package:garage/routes/router.dart';
 import 'package:garage/shared/shared.dart';
 import 'package:garage/theme/app_colors.dart';
 
@@ -14,9 +13,9 @@ class LoginForm extends ConsumerStatefulWidget {
 
 class _LoginFormState extends ConsumerState<LoginForm> {
   final TextEditingController _emailController = TextEditingController(
-      text: 'admin@example.com');
+      text: 'johndoe@example.com');
   final TextEditingController _passwordController = TextEditingController(
-      text: 'admin123');
+      text: 'Pass@123');
 
   @override
   void dispose() {
@@ -31,7 +30,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        // Title
         const Text(
           'Login to your account',
           style: TextStyle(
@@ -54,7 +52,6 @@ class _LoginFormState extends ConsumerState<LoginForm> {
         ),
 
         const SizedBox(height: 16),
-
         // Password TextField
         CustomTextField(
           controller: _passwordController,
@@ -94,7 +91,7 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               style: TextStyle(color: Color(0xFF718096), fontSize: 14),
             ),
             GestureDetector(
-              onTap: () => context.go(RouteNames.signUp.asPath),
+              // onTap: () => context.go(RouteNames.signUp.asPath),
               child: const Text(
                 'Get Started',
                 style: TextStyle(

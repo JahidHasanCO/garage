@@ -11,7 +11,6 @@ class AuthRepo {
     required String password,
   }) async {
     try {
-      // Make the POST request
       final response = await _client.dio.postUri<Map<String, dynamic>>(
         Uri.parse(AppUrl.adminLogin),
         data: {

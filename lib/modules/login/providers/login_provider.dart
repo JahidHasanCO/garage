@@ -20,8 +20,13 @@ class LoginProvider extends Notifier<LoginState> {
     final result = await _repo.login(email: email, password: password);
     if (result != null && (result.accessToken?.isNotEmpty ?? false)) {
       final token = result.accessToken!;
-      final user = User.fromMap(result.user?.toMap() ?? {});
-      ref.read(appProvider.notifier).setUser(token, user);
+      await ref
+          .read(appProvider.notifier)
+          .setUser(
+            token,
+            result.user,
+            result.profile,
+          );
       state = state.copyWith(
         status: StateStatus.success,
         message: 'Login successful',

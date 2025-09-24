@@ -8,11 +8,11 @@ class LoginPage extends StatelessWidget {
   static final route = GoRoute(
     path: RouteNames.login.asPath,
     name: RouteNames.login,
-    builder: (context, state) => LoginPage(),
+    builder: (context, state) => const LoginPage(),
   );
 
   @override
   Widget build(BuildContext context) {
-    return LoginScreen();
+    return const LoginScreen();
   }
 }
