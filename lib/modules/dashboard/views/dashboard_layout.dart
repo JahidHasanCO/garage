@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:garage_admin/data/models/menu_item.dart';
-import 'package:garage_admin/modules/dashboard/dashboard.dart';
-import 'package:garage_admin/modules/service_catalog/service_catalog.dart';
-import 'package:garage_admin/theme/app_colors.dart';
+import 'package:garage/data/models/menu_item.dart';
+import 'package:garage/modules/dashboard/dashboard.dart';
+import 'package:garage/modules/service_catalog/service_catalog.dart';
+import 'package:garage/theme/app_colors.dart';
 
 class DashboardLayout extends StatefulWidget {
   const DashboardLayout({super.key});

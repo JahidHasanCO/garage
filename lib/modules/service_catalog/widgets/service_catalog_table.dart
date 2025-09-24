@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage_admin/data/response/service_catalog_response.dart';
-import 'package:garage_admin/theme/app_colors.dart';
+import 'package:garage/data/response/service_catalog_response.dart';
+import 'package:garage/theme/app_colors.dart';
 import 'package:intl/intl.dart';
 
 class ServiceCatalogTable extends ConsumerWidget {

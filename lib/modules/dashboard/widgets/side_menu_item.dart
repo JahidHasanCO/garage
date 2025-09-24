@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:garage_admin/theme/app_colors.dart';
+import 'package:garage/theme/app_colors.dart';
 
 class SideMenuItem extends StatelessWidget {
   const SideMenuItem({

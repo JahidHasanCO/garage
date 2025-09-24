@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:garage_admin/data/enums/state_status.dart';
+import 'package:garage/data/enums/state_status.dart';
 
 class LoginState extends Equatable {
   const LoginState({

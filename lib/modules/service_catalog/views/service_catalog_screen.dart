@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage_admin/core/provider/provider.dart';
-import 'package:garage_admin/modules/service_catalog/service_catalog.dart';
-import 'package:garage_admin/shared/shared.dart';
-import 'package:garage_admin/theme/app_colors.dart';
-import 'package:garage_admin/utils/extension/ref.dart';
+import 'package:garage/core/provider/provider.dart';
+import 'package:garage/modules/service_catalog/service_catalog.dart';
+import 'package:garage/shared/shared.dart';
+import 'package:garage/theme/app_colors.dart';
+import 'package:garage/utils/extension/ref.dart';
 
 class ServiceCatalogScreen extends ConsumerStatefulWidget {
   const ServiceCatalogScreen({super.key});

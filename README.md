@@ -1,4 +1,4 @@
-# garage_admin
+# garage
 
 A new Flutter project.
 

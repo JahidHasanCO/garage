@@ -1,10 +1,10 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage_admin/core/provider/provider.dart';
-import 'package:garage_admin/core/provider/repo.dart';
-import 'package:garage_admin/data/enums/state_status.dart';
-import 'package:garage_admin/data/models/user.dart';
-import 'package:garage_admin/modules/login/providers/login_state.dart';
-import 'package:garage_admin/shared/repo/auth_repo.dart';
+import 'package:garage/core/provider/provider.dart';
+import 'package:garage/core/provider/repo.dart';
+import 'package:garage/data/enums/state_status.dart';
+import 'package:garage/data/models/user.dart';
+import 'package:garage/modules/login/providers/login_state.dart';
+import 'package:garage/shared/repo/auth_repo.dart';
 
 class LoginProvider extends Notifier<LoginState> {
   late AuthRepo _repo;

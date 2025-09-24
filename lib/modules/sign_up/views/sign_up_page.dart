@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_admin/modules/sign_up/sign_up.dart';
-import 'package:garage_admin/routes/router.dart';
+import 'package:garage/modules/sign_up/sign_up.dart';
+import 'package:garage/routes/router.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});

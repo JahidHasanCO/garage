@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
-import 'package:garage_admin/data/enums/state_status.dart';
-import 'package:garage_admin/data/response/service_catalog_response.dart';
+import 'package:garage/data/enums/state_status.dart';
+import 'package:garage/data/response/service_catalog_response.dart';
 
 class ServiceCatalogState extends Equatable {
   const ServiceCatalogState({

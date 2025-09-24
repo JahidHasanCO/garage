@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:garage_admin/core/const/app_url.dart';
-import 'package:garage_admin/data/response/service_catalog_response.dart';
-import 'package:garage_admin/shared/services/network/api_client.dart';
-import 'package:garage_admin/utils/extension/object.dart';
+import 'package:garage/core/const/app_url.dart';
+import 'package:garage/data/response/service_catalog_response.dart';
+import 'package:garage/shared/services/network/api_client.dart';
+import 'package:garage/utils/extension/object.dart';
 
 class ServiceRepo {
   final _client = ApiClient();

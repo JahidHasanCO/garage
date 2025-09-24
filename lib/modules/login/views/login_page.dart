@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_admin/modules/login/views/login_screen.dart';
-import 'package:garage_admin/routes/router.dart';
+import 'package:garage/modules/login/views/login_screen.dart';
+import 'package:garage/routes/router.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

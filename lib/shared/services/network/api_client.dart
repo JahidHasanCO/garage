@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:garage_admin/core/config/app_config.dart';
-import 'package:garage_admin/shared/services/network/app_interceptors.dart';
-import 'package:garage_admin/utils/extension/object.dart';
+import 'package:garage/core/config/app_config.dart';
+import 'package:garage/shared/services/network/app_interceptors.dart';
+import 'package:garage/utils/extension/object.dart';
 
 class ApiClient {
   factory ApiClient({String? accessToken, bool isNewIns = false}) {

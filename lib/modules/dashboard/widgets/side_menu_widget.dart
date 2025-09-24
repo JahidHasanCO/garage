@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_admin/data/models/menu_item.dart';
-import 'package:garage_admin/modules/dashboard/dashboard.dart';
+import 'package:garage/data/models/menu_item.dart';
+import 'package:garage/modules/dashboard/dashboard.dart';
 
 class SideMenuWidget extends StatelessWidget {
   const SideMenuWidget({

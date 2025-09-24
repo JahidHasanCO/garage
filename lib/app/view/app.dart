@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage_admin/core/provider/provider.dart';
-import 'package:garage_admin/routes/router.dart';
-import 'package:garage_admin/shared/services/network/api_client.dart';
-import 'package:garage_admin/theme/app_themes.dart';
-import 'package:garage_admin/utils/extension/ref.dart';
+import 'package:garage/core/provider/provider.dart';
+import 'package:garage/routes/router.dart';
+import 'package:garage/shared/services/network/api_client.dart';
+import 'package:garage/theme/app_themes.dart';
+import 'package:garage/utils/extension/ref.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 

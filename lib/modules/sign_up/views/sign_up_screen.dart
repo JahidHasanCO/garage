@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_admin/modules/sign_up/sign_up.dart';
-import 'package:garage_admin/theme/app_colors.dart';
+import 'package:garage/modules/sign_up/sign_up.dart';
+import 'package:garage/theme/app_colors.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});

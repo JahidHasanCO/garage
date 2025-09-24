@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:garage_admin/modules/dashboard/dashboard.dart';
-import 'package:garage_admin/routes/router.dart';
+import 'package:garage/modules/dashboard/dashboard.dart';
+import 'package:garage/routes/router.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});

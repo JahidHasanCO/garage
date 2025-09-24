@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:garage_admin/data/models/user.dart';
+import 'package:garage/data/models/user.dart';
 
 class AppState extends Equatable {
   const AppState({

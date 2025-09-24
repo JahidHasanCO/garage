@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage_admin/core/provider/provider.dart';
-import 'package:garage_admin/data/enums/state_status.dart';
-import 'package:garage_admin/modules/login/login.dart';
-import 'package:garage_admin/modules/login/providers/login_state.dart';
-import 'package:garage_admin/routes/router.dart';
-import 'package:garage_admin/theme/app_colors.dart';
-import 'package:garage_admin/theme/app_gaps.dart';
+import 'package:garage/core/provider/provider.dart';
+import 'package:garage/data/enums/state_status.dart';
+import 'package:garage/modules/login/login.dart';
+import 'package:garage/modules/login/providers/login_state.dart';
+import 'package:garage/routes/router.dart';
+import 'package:garage/theme/app_colors.dart';
+import 'package:garage/theme/app_gaps.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage_admin/core/provider/repo.dart';
-import 'package:garage_admin/data/enums/state_status.dart';
-import 'package:garage_admin/data/response/service_catalog_response.dart';
-import 'package:garage_admin/modules/service_catalog/service_catalog.dart';
-import 'package:garage_admin/shared/repo/service_repo.dart';
+import 'package:garage/core/provider/repo.dart';
+import 'package:garage/data/enums/state_status.dart';
+import 'package:garage/data/response/service_catalog_response.dart';
+import 'package:garage/modules/service_catalog/service_catalog.dart';
+import 'package:garage/shared/repo/service_repo.dart';
 
 class ServiceCatalogProvider extends Notifier<ServiceCatalogState> {
   late ServiceRepo _repo;

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:garage_admin/utils/extension/object.dart';
+import 'package:garage/utils/extension/object.dart';
 
 class AppInterceptors extends Interceptor {
   AppInterceptors(this.dio);

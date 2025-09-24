@@ -1,9 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:garage_admin/routes/router.dart';
+import 'package:garage/routes/router.dart';
 
-import 'package:garage_admin/shared/shared.dart';
-import 'package:garage_admin/theme/app_colors.dart';
+import 'package:garage/shared/shared.dart';
+import 'package:garage/theme/app_colors.dart';
 
 class SignupForm extends StatefulWidget {
   const SignupForm({super.key});

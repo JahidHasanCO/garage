@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:garage_admin/theme/theme.dart';
+import 'package:garage/theme/theme.dart';
 
 ThemeData appTheme() {
   return ThemeData(

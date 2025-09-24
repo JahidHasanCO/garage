@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage_admin/app/providers/app/app_state.dart';
-import 'package:garage_admin/data/models/user.dart';
+import 'package:garage/app/providers/app/app_state.dart';
+import 'package:garage/data/models/user.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AppProvider extends Notifier<AppState> {
