@@ -1,10 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geolocator/geolocator.dart';
+
 import 'package:garage/core/provider/repo.dart';
 import 'package:garage/data/enums/state_status.dart';
 import 'package:garage/modules/home/providers/home_state.dart';
+import 'package:garage/modules/home/providers/service_packages_provider.dart';
 import 'package:garage/shared/repo/home_repo.dart';
-import 'package:geolocator/geolocator.dart';
 
 class HomeProvider extends Notifier<HomeState> {
   late HomeRepo _repo;
@@ -78,6 +80,11 @@ class HomeProvider extends Notifier<HomeState> {
             ? 'Using cached location' 
             : 'Location updated',
       );
+
+      // Fetch nearby services if location is available
+      if (result.hasLocation) {
+        _fetchNearbyServices(result.position!);
+      }
       
     } on Exception {
       // Try to get cached location as fallback
@@ -126,6 +133,19 @@ class HomeProvider extends Notifier<HomeState> {
       isLocationFromCache: false,
       message: 'Location cleared',
     );
+  }
+
+  /// Fetch nearby services based on current location
+  Future<void> _fetchNearbyServices(Position position) async {
+    try {
+      await ref.read(servicePackagesProvider.notifier).getNearbyServices(
+        lat: position.latitude,
+        lng: position.longitude,
+      );
+    } on Exception {
+      // Silently handle service fetch errors
+      // The main location functionality should still work
+    }
   }
 }
 
