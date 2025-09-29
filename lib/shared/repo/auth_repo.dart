@@ -12,7 +12,7 @@ class AuthRepo {
   }) async {
     try {
       final response = await _client.dio.postUri<Map<String, dynamic>>(
-        Uri.parse(AppUrl.adminLogin),
+        Uri.parse(AppUrl.login),
         data: {
           'email': email,
           'password': password,

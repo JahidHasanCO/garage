@@ -8,7 +8,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
   AppConfig.envProd = true;
-  AppConfig.baseUrl = dotenv.env['LOCAL']!;
+  AppConfig.baseUrl = dotenv.env['PRODUCTION']!;
   runApp(
     const ProviderScope(
       child: MyApp(),
