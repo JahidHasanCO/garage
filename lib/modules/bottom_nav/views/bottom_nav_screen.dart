@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:garage/modules/home/home.dart';
 import 'package:garage/theme/app_colors.dart';
 
 
@@ -13,7 +14,7 @@ class _BottomNavScreenState extends State<BottomNavScreen> {
   int _selectedIndex = 0;
 
   final List<Widget> widgetOptions = const [
-    Center(child: Text('Home Screen')),
+    HomeView(),
     Center(child: Text('Menu Screen')),
   ];
 

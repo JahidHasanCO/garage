@@ -2,7 +2,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:garage/core/provider/provider.dart';
 import 'package:garage/core/provider/repo.dart';
 import 'package:garage/data/enums/state_status.dart';
-import 'package:garage/data/models/user.dart';
 import 'package:garage/modules/login/providers/login_state.dart';
 import 'package:garage/shared/repo/auth_repo.dart';
 
