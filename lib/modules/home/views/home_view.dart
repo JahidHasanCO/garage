@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage/modules/home/providers/home_provider.dart';
+import 'package:garage/core/provider/provider.dart';
+import 'package:garage/modules/home/home.dart';
 
 class HomeView extends ConsumerWidget {
   const HomeView({super.key});
@@ -10,65 +11,16 @@ class HomeView extends ConsumerWidget {
     final homeState = ref.watch(homeProvider);
     
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-        actions: [
-          // Location display with refresh button
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  homeState.isLocationFromCache 
-                      ? Icons.location_off 
-                      : Icons.location_on,
-                  size: 16,
-                  color: homeState.isLocationFromCache 
-                      ? Colors.orange 
-                      : Colors.green,
-                ),
-                const SizedBox(width: 4),
-                Container(
-                  constraints: const BoxConstraints(maxWidth: 150),
-                  child: Text(
-                    _getShortLocationText(homeState.displayLocation),
-                    style: Theme.of(context).textTheme.bodySmall,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                GestureDetector(
-                  onTap: homeState.status.isLoading 
-                      ? null 
-                      : () => ref.read(homeProvider.notifier).refreshLocation(),
-                  child: homeState.status.isLoading
-                      ? const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                          ),
-                        )
-                      : const Icon(
-                          Icons.refresh,
-                          size: 16,
-                        ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      appBar: const CustomAppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Location status card
             Card(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -168,18 +120,5 @@ class HomeView extends ConsumerWidget {
         ),
       ),
     );
-  }
-
-  /// Helper method to get a short version of location text for AppBar
-  String _getShortLocationText(String fullLocation) {
-    // If it's an address, try to show just the city/area
-    if (fullLocation.contains(',')) {
-      final parts = fullLocation.split(',');
-      if (parts.length >= 2) {
-        // Show first two parts (usually street + area/city)
-        return '${parts[0].trim()}, ${parts[1].trim()}';
-      }
-    }
-    return fullLocation;
   }
 }

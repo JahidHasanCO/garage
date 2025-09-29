@@ -123,14 +123,9 @@ class HomeProvider extends Notifier<HomeState> {
   Future<void> clearLocation() async {
     await _repo.clearSavedLocation();
     state = state.copyWith(
-      currentLocation: null,
-      locationAddress: null,
       isLocationFromCache: false,
       message: 'Location cleared',
     );
   }
 }
 
-final homeProvider = NotifierProvider<HomeProvider, HomeState>(
-  HomeProvider.new,
-);
