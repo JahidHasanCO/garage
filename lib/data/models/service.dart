@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:garage/data/models/part.dart';
 
 class Service extends Equatable {
   const Service({
@@ -27,9 +28,9 @@ class Service extends Equatable {
         : int.tryParse(json['estimated_time']?.toString() ?? ''),
     partsNeeded: json['parts_needed'] == null
         ? []
-        : List<dynamic>.from(
-            (json['parts_needed'] as List<dynamic>? ?? []).map((x) => x),
-          ),
+        : (json['parts_needed'] as List<dynamic>)
+              .map((x) => Part.fromJson(x as Map<String, dynamic>))
+              .toList(),
     image: json['image'] as String?,
     discount: json['discount'] is int
         ? json['discount'] as int?
@@ -50,7 +51,7 @@ class Service extends Equatable {
   final String? description;
   final int? price;
   final int? estimatedTime;
-  final List<dynamic>? partsNeeded;
+  final List<Part>? partsNeeded;
   final String? image;
   final int? discount;
   final DateTime? createdAt;

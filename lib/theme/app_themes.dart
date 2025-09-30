@@ -5,7 +5,7 @@ import 'package:garage/theme/theme.dart';
 ThemeData appTheme() {
   return ThemeData(
     fontFamily: 'Roboto',
-    scaffoldBackgroundColor: AppColors.whiteColor,
+    scaffoldBackgroundColor: AppColors.backgroundColor,
     primaryColor: AppColors.primary,
     colorScheme: const ColorScheme(
       brightness: Brightness.light,
@@ -27,14 +27,14 @@ ThemeData appTheme() {
 
 AppBarTheme appBarTheme() {
   return const AppBarTheme(
-    color: AppColors.backgroundColor,
+    backgroundColor: AppColors.whiteColor,
     elevation: 0,
     centerTitle: false,
     systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: AppColors.backgroundColor, // Status bar
+      statusBarColor: AppColors.whiteColor, // Status bar
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: AppColors.backgroundColor,
+      systemNavigationBarColor: AppColors.whiteColor,
     ),
     iconTheme: IconThemeData(color: AppColors.textTitleColor),
     titleTextStyle: TextStyle(

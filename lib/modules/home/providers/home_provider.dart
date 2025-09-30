@@ -1,34 +1,34 @@
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:geolocator/geolocator.dart';
-
 import 'package:garage/core/provider/repo.dart';
 import 'package:garage/data/enums/state_status.dart';
 import 'package:garage/modules/home/providers/home_state.dart';
-import 'package:garage/modules/home/providers/service_packages_provider.dart';
 import 'package:garage/shared/repo/home_repo.dart';
+import 'package:garage/shared/repo/service_package_repo.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomeProvider extends Notifier<HomeState> {
   late HomeRepo _repo;
+  late ServicePackageRepo _servicePackageRepo;
 
   @override
   HomeState build() {
     _repo = ref.read(homeRepoProvider);
-    // Initialize location on build
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      initializeLocation();
-    });
+    _servicePackageRepo = ref.read(servicePackageRepoProvider);
     return const HomeState();
+  }
+
+  Future<void> onInit() async {
+    await initializeLocation();
   }
 
   /// Initialize location on app start
   Future<void> initializeLocation() async {
     state = state.copyWith(status: StateStatus.loading);
-    
+
     try {
       // Check if location service is enabled
       final isServiceEnabled = await _repo.isLocationServiceEnabled();
-      
+
       if (!isServiceEnabled) {
         // Try to get cached location
         final result = await _repo.getCurrentLocation();
@@ -38,8 +38,8 @@ class HomeProvider extends Notifier<HomeState> {
           locationAddress: result.address,
           isLocationFromCache: result.isFromCache,
           isLocationServiceEnabled: false,
-          message: result.hasLocation 
-              ? 'Using cached location' 
+          message: result.hasLocation
+              ? 'Using cached location'
               : 'Location service is disabled',
         );
         return;
@@ -47,7 +47,7 @@ class HomeProvider extends Notifier<HomeState> {
 
       // Check permissions
       final permission = await _repo.requestLocationPermission();
-      
+
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
         // Try to get cached location
@@ -59,8 +59,8 @@ class HomeProvider extends Notifier<HomeState> {
           isLocationFromCache: result.isFromCache,
           hasLocationPermission: false,
           isLocationServiceEnabled: isServiceEnabled,
-          message: result.hasLocation 
-              ? 'Using cached location' 
+          message: result.hasLocation
+              ? 'Using cached location'
               : 'Location permission denied',
         );
         return;
@@ -68,7 +68,7 @@ class HomeProvider extends Notifier<HomeState> {
 
       // Get current location
       final result = await _repo.getCurrentLocation();
-      
+
       state = state.copyWith(
         status: StateStatus.success,
         currentLocation: result.position,
@@ -76,16 +76,18 @@ class HomeProvider extends Notifier<HomeState> {
         isLocationFromCache: result.isFromCache,
         hasLocationPermission: true,
         isLocationServiceEnabled: isServiceEnabled,
-        message: result.isFromCache 
-            ? 'Using cached location' 
+        message: result.isFromCache
+            ? 'Using cached location'
             : 'Location updated',
       );
 
       // Fetch nearby services if location is available
       if (result.hasLocation) {
-        _fetchNearbyServices(result.position!);
+        await getNearbyServices(
+          lat: result.position!.latitude,
+          lng: result.position!.longitude,
+        );
       }
-      
     } on Exception {
       // Try to get cached location as fallback
       final result = await _repo.getCurrentLocation();
@@ -94,8 +96,8 @@ class HomeProvider extends Notifier<HomeState> {
         currentLocation: result.position,
         locationAddress: result.address,
         isLocationFromCache: result.isFromCache,
-        message: result.hasLocation 
-            ? 'Using cached location' 
+        message: result.hasLocation
+            ? 'Using cached location'
             : 'Failed to get location',
       );
     }
@@ -104,20 +106,19 @@ class HomeProvider extends Notifier<HomeState> {
   /// Refresh current location
   Future<void> refreshLocation() async {
     state = state.copyWith(status: StateStatus.loading);
-    
+
     try {
       final result = await _repo.getCurrentLocation();
-      
+
       state = state.copyWith(
         status: StateStatus.success,
         currentLocation: result.position,
         locationAddress: result.address,
         isLocationFromCache: result.isFromCache,
-        message: result.isFromCache 
-            ? 'Using cached location' 
+        message: result.isFromCache
+            ? 'Using cached location'
             : 'Location updated',
       );
-      
     } on Exception {
       state = state.copyWith(
         status: StateStatus.error,
@@ -135,17 +136,37 @@ class HomeProvider extends Notifier<HomeState> {
     );
   }
 
-  /// Fetch nearby services based on current location
-  Future<void> _fetchNearbyServices(Position position) async {
+  Future<void> getNearbyServices({
+    required double lat,
+    required double lng,
+    int page = 1,
+  }) async {
+    state = state.copyWith(status: StateStatus.loading);
+
     try {
-      await ref.read(servicePackagesProvider.notifier).getNearbyServices(
-        lat: position.latitude,
-        lng: position.longitude,
+      final response = await _servicePackageRepo.getNearbyServices(
+        lat: lat,
+        lng: lng,
+        page: page,
       );
+
+      if (response != null) {
+        state = state.copyWith(
+          status: StateStatus.success,
+          packages: response.packages,
+          message: 'Services loaded successfully',
+        );
+      } else {
+        state = state.copyWith(
+          status: StateStatus.error,
+          message: 'Failed to load nearby services',
+        );
+      }
     } on Exception {
-      // Silently handle service fetch errors
-      // The main location functionality should still work
+      state = state.copyWith(
+        status: StateStatus.error,
+        message: 'Failed to load nearby services',
+      );
     }
   }
 }
-

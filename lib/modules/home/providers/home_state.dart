@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:garage/data/enums/state_status.dart';
+import 'package:garage/data/models/service_package.dart';
 import 'package:geolocator/geolocator.dart';
 
 class HomeState extends Equatable {
@@ -11,6 +12,7 @@ class HomeState extends Equatable {
     this.isLocationFromCache = false,
     this.hasLocationPermission = false,
     this.isLocationServiceEnabled = false,
+    this.packages = const [],
   });
 
   final StateStatus status;
@@ -20,6 +22,7 @@ class HomeState extends Equatable {
   final bool isLocationFromCache;
   final bool hasLocationPermission;
   final bool isLocationServiceEnabled;
+  final List<ServicePackage> packages;
 
   HomeState copyWith({
     StateStatus? status,
@@ -29,6 +32,7 @@ class HomeState extends Equatable {
     bool? isLocationFromCache,
     bool? hasLocationPermission,
     bool? isLocationServiceEnabled,
+    List<ServicePackage>? packages,
   }) {
     return HomeState(
       status: status ?? this.status,
@@ -36,31 +40,36 @@ class HomeState extends Equatable {
       currentLocation: currentLocation ?? this.currentLocation,
       locationAddress: locationAddress ?? this.locationAddress,
       isLocationFromCache: isLocationFromCache ?? this.isLocationFromCache,
-      hasLocationPermission: hasLocationPermission ?? this.hasLocationPermission,
-      isLocationServiceEnabled: isLocationServiceEnabled ?? this.isLocationServiceEnabled,
+      hasLocationPermission:
+          hasLocationPermission ?? this.hasLocationPermission,
+      isLocationServiceEnabled:
+          isLocationServiceEnabled ?? this.isLocationServiceEnabled,
+      packages: packages ?? this.packages,
     );
   }
 
   bool get hasLocation => currentLocation != null;
-  
+
   String get displayLocation {
     if (locationAddress != null && locationAddress!.isNotEmpty) {
       return locationAddress!;
     }
     if (currentLocation != null) {
-      return '${currentLocation!.latitude.toStringAsFixed(4)}, ${currentLocation!.longitude.toStringAsFixed(4)}';
+      return '${currentLocation!.latitude.toStringAsFixed(4)},'
+          ' ${currentLocation!.longitude.toStringAsFixed(4)}';
     }
     return 'Location not available';
   }
 
   @override
   List<Object?> get props => [
-        status,
-        message,
-        currentLocation,
-        locationAddress,
-        isLocationFromCache,
-        hasLocationPermission,
-        isLocationServiceEnabled,
-      ];
+    status,
+    message,
+    currentLocation,
+    locationAddress,
+    isLocationFromCache,
+    hasLocationPermission,
+    isLocationServiceEnabled,
+    packages,
+  ];
 }

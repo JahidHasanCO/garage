@@ -1,7 +1,5 @@
 export 'providers/home_provider.dart';
 export 'providers/home_state.dart';
-export 'providers/service_packages_provider.dart';
-export 'providers/service_packages_state.dart';
 export 'views/home_view.dart';
 export 'views/service_package_details_page.dart';
 export 'widgets/custom_app_bar.dart';

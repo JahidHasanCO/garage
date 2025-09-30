@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:garage/modules/home/providers/service_packages_provider.dart';
-import 'package:garage/modules/home/views/service_package_details_page.dart';
+import 'package:garage/core/provider/provider.dart';
 import 'package:garage/modules/home/widgets/service_package_card.dart';
+import 'package:garage/shared/shared.dart';
+import 'package:garage/utils/extension/ref.dart';
 
 class NearbyServicesSection extends ConsumerWidget {
   const NearbyServicesSection({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final servicePackagesState = ref.watch(servicePackagesProvider);
-
+    final theme = Theme.of(context);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -22,14 +22,16 @@ class NearbyServicesSection extends ConsumerWidget {
             children: [
               Text(
                 'Nearby Services',
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                style: theme.textTheme.titleMedium?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               TextButton(
-                onPressed: () {
-                  // TODO: Handle see all tap
-                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                ),
+                onPressed: () {},
                 child: const Text('See All'),
               ),
             ],
@@ -41,76 +43,25 @@ class NearbyServicesSection extends ConsumerWidget {
           height: 300,
           child: Builder(
             builder: (context) {
-              if (servicePackagesState.status.isLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
+              final status = ref.select(homeProvider, (s) => s.status);
+              final packages = ref.select(homeProvider, (s) => s.packages);
 
-              if (servicePackagesState.status.isError) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.error_outline,
-                        size: 48,
-                        color: Colors.grey[400],
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        servicePackagesState.message,
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  ),
-                );
+              if (status.isLoading) {
+                return const Center(child: CircularProgressIndicator());
               }
-
-              if (!servicePackagesState.hasPackages) {
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.local_car_wash_outlined,
-                        size: 48,
-                        color: Colors.grey[400],
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'No nearby services found',
-                        style: TextStyle(
-                          color: Colors.grey[600],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
+              if (status.isError) return _error();
+              if (packages.isEmpty) return _empty();
 
               // Services horizontal list
               return ListView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
-                itemCount: servicePackagesState.packages.length,
+                itemCount: packages.length,
                 itemBuilder: (context, index) {
-                  final package = servicePackagesState.packages[index];
+                  final package = packages[index];
                   return ServicePackageCard(
                     package: package,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute<void>(
-                          builder: (context) => ServicePackageDetailsPage(
-                            package: package,
-                          ),
-                        ),
-                      );
-                    },
+                    onTap: () {},
                   );
                 },
               );
@@ -118,6 +69,57 @@ class NearbyServicesSection extends ConsumerWidget {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _error() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.error_outline,
+            size: 48,
+            color: Colors.grey[400],
+          ),
+          const SizedBox(height: 8),
+          ProviderSelector(
+            provider: homeProvider,
+            selector: (value) => value.message,
+            builder: (context, message) {
+              return Text(
+                message,
+                style: TextStyle(
+                  color: Colors.grey[600],
+                ),
+                textAlign: TextAlign.center,
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _empty() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.local_car_wash_outlined,
+            size: 48,
+            color: Colors.grey[400],
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'No nearby services found',
+            style: TextStyle(
+              color: Colors.grey[600],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

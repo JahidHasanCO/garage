@@ -18,7 +18,6 @@ class CustomAppBar extends ConsumerWidget implements PreferredSizeWidget {
     final theme = Theme.of(context);
 
     return AppBar(
-      backgroundColor: theme.scaffoldBackgroundColor,
       elevation: 0,
       title: Row(
         children: [
