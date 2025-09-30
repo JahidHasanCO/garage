@@ -27,7 +27,7 @@ class HomeRepo {
 
       if (cachedPosition != null) {
         // Try to get cached address first, fallback to geocoding
-        String address = await _locationService.getCachedAddress() ?? '';
+        var address = await _locationService.getCachedAddress() ?? '';
         if (address.isEmpty) {
           address = await _locationService.getAddressFromCoordinates(
             cachedPosition,
@@ -49,7 +49,7 @@ class HomeRepo {
 
       if (cachedPosition != null) {
         // Try to get cached address first, fallback to geocoding
-        String address = await _locationService.getCachedAddress() ?? '';
+        var address = await _locationService.getCachedAddress() ?? '';
         if (address.isEmpty) {
           address = await _locationService.getAddressFromCoordinates(
             cachedPosition,

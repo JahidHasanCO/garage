@@ -41,13 +41,15 @@ class ServicePackageCard extends StatelessWidget {
                   topLeft: Radius.circular(12),
                   topRight: Radius.circular(12),
                 ),
-                image: DecorationImage(
-                  image: NetworkImage(package.image),
-                  fit: BoxFit.cover,
-                  onError: (exception, stackTrace) {
-                    // Handle image loading error
-                  },
-                ),
+                image: package.image != null
+                    ? DecorationImage(
+                        image: NetworkImage(package.image!),
+                        fit: BoxFit.cover,
+                        onError: (exception, stackTrace) {
+                          // Handle image loading error
+                        },
+                      )
+                    : null,
               ),
               child: Container(
                 decoration: BoxDecoration(
@@ -78,7 +80,7 @@ class ServicePackageCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(6),
                       ),
                       child: Text(
-                        '৳${package.price.toStringAsFixed(0)}',
+                        '৳${package.price?.toStringAsFixed(0)}',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -98,7 +100,7 @@ class ServicePackageCard extends StatelessWidget {
                 children: [
                   // Package name
                   Text(
-                    package.name,
+                    package.name ?? 'Unnamed Package',
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
                     ),
@@ -108,14 +110,14 @@ class ServicePackageCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   // Services count
                   Text(
-                    '${package.services.length} services included',
+                    '${package.services?.length} services included',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       color: Colors.grey[600],
                     ),
                   ),
                   const SizedBox(height: 8),
                   // Garage info
-                  if (package.garages.isNotEmpty) ...[
+                  if (package.garages?.isNotEmpty ?? false) ...[
                     Row(
                       children: [
                         Icon(
@@ -126,10 +128,11 @@ class ServicePackageCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Expanded(
                           child: Text(
-                            package.garages.first.name,
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.grey[600],
-                            ),
+                            package.garages!.first.name ?? 'Unnamed Garage',
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(
+                                  color: Colors.grey[600],
+                                ),
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
@@ -138,7 +141,7 @@ class ServicePackageCard extends StatelessWidget {
                     const SizedBox(height: 4),
                   ],
                   // Duration info
-                  if (package.duration > 0) ...[
+                  if ((package.duration ?? 0) > 0) ...[
                     Row(
                       children: [
                         Icon(
@@ -149,9 +152,10 @@ class ServicePackageCard extends StatelessWidget {
                         const SizedBox(width: 4),
                         Text(
                           '${package.duration} minutes',
-                          style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.grey[600],
-                          ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Colors.grey[600],
+                              ),
                         ),
                       ],
                     ),

@@ -1,5 +1,5 @@
 import 'package:garage/core/const/app_url.dart';
-import 'package:garage/data/models/service_package.dart';
+import 'package:garage/data/response/service_packages_response.dart';
 import 'package:garage/shared/services/network/api_client.dart';
 import 'package:garage/utils/extension/object.dart';
 
@@ -12,7 +12,7 @@ class ServicePackageRepo {
     int page = 1,
   }) async {
     try {
-      final uri = Uri.parse('${AppUrl.baseUrl}${AppUrl.packages}')
+      final uri = Uri.parse(AppUrl.packages)
           .replace(queryParameters: {
         'lat': lat.toString(),
         'lng': lng.toString(),
