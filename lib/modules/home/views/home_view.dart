@@ -28,6 +28,8 @@ class HomeViewState extends ConsumerState<HomeView> {
           children: [
             SizedBox(height: 10),
             NearbyServicesSection(),
+            SizedBox(height: 10),
+            NearbyGaragesSection(),
             SizedBox(height: 24),
           ],
         ),

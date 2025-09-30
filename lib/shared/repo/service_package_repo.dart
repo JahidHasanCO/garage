@@ -11,6 +11,7 @@ class ServicePackageRepo {
     required double lat,
     required double lng,
     int page = 1,
+    int limit = 10,
   }) async {
     try {
       final uri = Uri.parse(AppUrl.packagesNearby).replace(
@@ -18,6 +19,7 @@ class ServicePackageRepo {
           'lat': lat.toString(),
           'lng': lng.toString(),
           'page': page.toString(),
+          'limit': limit.toString(),
         },
       );
 

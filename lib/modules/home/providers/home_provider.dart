@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:garage/core/provider/repo.dart';
 import 'package:garage/data/enums/state_status.dart';
 import 'package:garage/modules/home/providers/home_state.dart';
+import 'package:garage/shared/repo/garage_repo.dart';
 import 'package:garage/shared/repo/home_repo.dart';
 import 'package:garage/shared/repo/service_package_repo.dart';
 import 'package:geolocator/geolocator.dart';
@@ -9,11 +10,13 @@ import 'package:geolocator/geolocator.dart';
 class HomeProvider extends Notifier<HomeState> {
   late HomeRepo _repo;
   late ServicePackageRepo _servicePackageRepo;
+  late GarageRepo _garageRepo;
 
   @override
   HomeState build() {
     _repo = ref.read(homeRepoProvider);
     _servicePackageRepo = ref.read(servicePackageRepoProvider);
+    _garageRepo = ref.read(garageRepoProvider);
     return const HomeState();
   }
 
@@ -87,6 +90,10 @@ class HomeProvider extends Notifier<HomeState> {
           lat: result.position!.latitude,
           lng: result.position!.longitude,
         );
+        await getNearbyGarages(
+          lat: result.position!.latitude,
+          lng: result.position!.longitude,
+        );
       }
     } on Exception {
       // Try to get cached location as fallback
@@ -143,29 +150,48 @@ class HomeProvider extends Notifier<HomeState> {
   }) async {
     state = state.copyWith(status: StateStatus.loading);
 
-    try {
-      final response = await _servicePackageRepo.getNearbyServices(
-        lat: lat,
-        lng: lng,
-        page: page,
-      );
+    final response = await _servicePackageRepo.getNearbyServices(
+      lat: lat,
+      lng: lng,
+      page: page,
+    );
 
-      if (response != null) {
-        state = state.copyWith(
-          status: StateStatus.success,
-          packages: response.packages,
-          message: 'Services loaded successfully',
-        );
-      } else {
-        state = state.copyWith(
-          status: StateStatus.error,
-          message: 'Failed to load nearby services',
-        );
-      }
-    } on Exception {
+    if (response != null) {
+      state = state.copyWith(
+        status: StateStatus.success,
+        packages: response.packages,
+        message: 'Services loaded successfully',
+      );
+    } else {
       state = state.copyWith(
         status: StateStatus.error,
         message: 'Failed to load nearby services',
+      );
+    }
+  }
+
+  Future<void> getNearbyGarages({
+    required double lat,
+    required double lng,
+    int page = 1,
+  }) async {
+    state = state.copyWith(status: StateStatus.loading);
+
+    final response = await _garageRepo.getNearbyGarages(
+      lat: lat,
+      lng: lng,
+      page: page,
+    );
+
+    if (response != null) {
+      state = state.copyWith(
+        status: StateStatus.success,
+        garages: response.garages,
+      );
+    } else {
+      state = state.copyWith(
+        status: StateStatus.error,
+        message: 'Failed to load nearby Garage',
       );
     }
   }
