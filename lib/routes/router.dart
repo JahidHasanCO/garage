@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:garage/modules/bottom_nav/bottom_nav.dart';
 import 'package:garage/modules/login/views/login_page.dart';
+import 'package:garage/modules/service_package_details/service_package_details.dart';
 import 'package:garage/modules/sign_up/sign_up.dart';
 import 'package:go_router/go_router.dart';
 

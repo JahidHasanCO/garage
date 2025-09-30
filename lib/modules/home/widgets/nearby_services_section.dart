@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:garage/core/provider/provider.dart';
 import 'package:garage/modules/home/widgets/service_package_card.dart';
+import 'package:garage/routes/router.dart';
 import 'package:garage/shared/shared.dart';
 import 'package:garage/utils/extension/ref.dart';
 
@@ -61,7 +62,12 @@ class NearbyServicesSection extends ConsumerWidget {
                   final package = packages[index];
                   return ServicePackageCard(
                     package: package,
-                    onTap: () {},
+                    onTap: () => context.pushNamed(
+                      RouteNames.servicePackageDetails,
+                      queryParameters: {
+                        'id': package.id.toString(),
+                      },
+                    ),
                   );
                 },
                 separatorBuilder: (context, index) => const SizedBox(width: 12),

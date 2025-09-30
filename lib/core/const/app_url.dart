@@ -7,4 +7,5 @@ class AppUrl {
   static String login = '${dotenv.env['LOGIN']}';
   static String services = '${dotenv.env['SERVICES']}';
   static String packages = '${dotenv.env['PACKAGES']}';
+  static String packagesNearby = '${dotenv.env['PACKAGES_NEARBY']}';
 }

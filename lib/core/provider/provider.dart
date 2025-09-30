@@ -4,6 +4,7 @@ import 'package:garage/modules/home/home.dart';
 import 'package:garage/modules/login/providers/login_provider.dart';
 import 'package:garage/modules/login/providers/login_state.dart';
 import 'package:garage/modules/service_catalog/service_catalog.dart';
+import 'package:garage/modules/service_package_details/service_package_details.dart';
 
 final appProvider = NotifierProvider<AppProvider, AppState>(
   AppProvider.new,
@@ -20,4 +21,9 @@ final homeProvider = NotifierProvider<HomeProvider, HomeState>(
 final serviceCatalogProvider =
     NotifierProvider<ServiceCatalogProvider, ServiceCatalogState>(
       ServiceCatalogProvider.new,
+    );
+
+final servicePackageDetailsProvider =
+    NotifierProvider<ServicePackageDetailsProvider, ServicePackageDetailsState>(
+      ServicePackageDetailsProvider.new,
     );

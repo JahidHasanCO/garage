@@ -15,6 +15,7 @@ final class AppRouter {
           BottomNavPage.route,
           LoginPage.route,
           SignUpPage.route,
+          ServicePackageDetailsPage.route,
         ],
         initialLocation: initialLocation,
         navigatorKey: _rootNavigatorKey ??= GlobalKey<NavigatorState>(),
