@@ -40,7 +40,7 @@ class NearbyServicesSection extends ConsumerWidget {
         const SizedBox(height: 12),
         // Services list
         SizedBox(
-          height: 300,
+          height: 280,
           child: Builder(
             builder: (context) {
               final status = ref.select(homeProvider, (s) => s.status);
@@ -53,7 +53,7 @@ class NearbyServicesSection extends ConsumerWidget {
               if (packages.isEmpty) return _empty();
 
               // Services horizontal list
-              return ListView.builder(
+              return ListView.separated(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount: packages.length,
@@ -64,6 +64,7 @@ class NearbyServicesSection extends ConsumerWidget {
                     onTap: () {},
                   );
                 },
+                separatorBuilder: (context, index) => const SizedBox(width: 12),
               );
             },
           ),
